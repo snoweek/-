@@ -43,8 +43,8 @@ grade记录成绩;student_id记录学生的学号。两个表之间以student_id
 ##功能详细介绍
 
 ###查询学生成绩
-
 1. 若用户还未绑定学号，则返回提示信息："对不起，你还没有绑定学号，请输入成绩加学好;如：成绩199434040086"。
+
 check_user()函数
 ```
 function check_user($submit_open_id){
@@ -106,6 +106,7 @@ function insert_user($submit_open_id,$submit_student_id){
 ```
 
 5. 用户可以对学号进行解绑，即输入“解绑即可”
+
 ```
 function delete_user($submit_open_id){
         $db=mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
@@ -122,28 +123,27 @@ function delete_user($submit_open_id){
 调用天气接口的代码如下：
 ```
 include 'weather.php'; //引入天气请求类
-                $appkey = 'f67769dc51bfad1c06bb09312b873176'; //您申请的天气查询appkey
-                $weather = new weather($appkey);
-                $cityname=mb_substr($keyword,2,5,'utf-8');
-                $cityWeatherResult = $weather->getWeather($cityname);                
-               if($cityWeatherResult['error_code'] == 0){ 
-                    $data = $cityWeatherResult['result'];
-                    $msgType = "text";
-                    $contentStr = "==当前天气实况==\n温度：".$data['sk']['temp']."\n"."风向：".$data['sk']['wind_direction']."（".$data['sk']['wind_strength']."）"."\n湿度：".$data['sk']['humidity'];
-                    $contentStr.="\n\n==相关天气指数=======\n"."穿衣指数：".$data['today']['dressing_index']." , ".$data['today']['dressing_advice'];
-                    $contentStr.="\n\n==未来几天天气预报==\n";
-                    foreach($data['future'] as $wkey =>$f){
-       
-                        $contentStr.="日期:".$f['date']." ".$f['week']." ".$f['weather']." ".$f['temperature']."\n";
-                    }
-                    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                    echo $resultStr;
-               }else{
-                    $msgType = "text";
-                    $contentStr = "【".$cityname."】".$cityWeatherResult['reason']."，请确保城市信息输入有效";
-                    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                    echo $resultStr;                  
-               }         
+$appkey = 'f67769dc51bfad1c06bb09312b873176'; //您申请的天气查询appkey
+$weather = new weather($appkey);
+$cityname=mb_substr($keyword,2,5,'utf-8');
+$cityWeatherResult = $weather->getWeather($cityname);                
+if($cityWeatherResult['error_code'] == 0){ 
+  $data = $cityWeatherResult['result'];
+  $msgType = "text";
+  $contentStr = "==当前天气实况==\n温度：".$data['sk']['temp']."\n"."风向：".$data['sk']['wind_direction']."（".$data['sk']['wind_strength']."）"."\n湿度：".$data['sk']['humidity'];
+  $contentStr.="\n\n==相关天气指数=======\n"."穿衣指数：".$data['today']['dressing_index']." , ".$data['today']['dressing_advice'];
+  $contentStr.="\n\n==未来几天天气预报==\n";
+  foreach($data['future'] as $wkey =>$f){       
+    $contentStr.="日期:".$f['date']." ".$f['week']." ".$f['weather']." ".$f['temperature']."\n";
+  }
+  $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+  echo $resultStr;
+}else{
+  $msgType = "text";
+  $contentStr = "【".$cityname."】".$cityWeatherResult['reason']."，请确保城市信息输入有效";
+  $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+  echo $resultStr;                  
+}         
 ```
 
 ### 查询当前时间
