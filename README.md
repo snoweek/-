@@ -63,8 +63,11 @@ function check_user($submit_open_id){
     }
 ```
 此函数通过发送者帐号$open_id在user表中进行查询。
+
 2. 若用户已绑定学号，但grade_list表中没有其学生信息，则返回提示信息："你没有成绩记录"。
+
 3. 若用户已绑定学号，且grade_list表中有其成绩信息，则返回一个链接，学生通过点击该链接查询自己的成绩。
+
 search_grade()
 ```
 
@@ -88,7 +91,9 @@ search_grade()
         return $result;           
     }
 ```
+
 4. 若用户进行绑定学号行为，即输入成绩加学号
+
 ```
 function insert_user($submit_open_id,$submit_student_id){
         $db=mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
@@ -99,6 +104,7 @@ function insert_user($submit_open_id,$submit_student_id){
         return $rows;    
     }
 ```
+
 5. 用户可以对学号进行解绑，即输入“解绑即可”
 ```
 function delete_user($submit_open_id){
