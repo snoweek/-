@@ -43,7 +43,6 @@ grade记录成绩;student_id记录学生的学号。两个表之间以student_id
 ##功能详细介绍
 
 ###查询学生成绩
-
 1. 若用户还未绑定学号，则返回提示信息："对不起，你还没有绑定学号，请输入成绩加学好;如：成绩199434040086"。
 check_user()函数
 ```
@@ -63,9 +62,7 @@ function check_user($submit_open_id){
     }
 ```
 此函数通过发送者帐号$open_id在user表中进行查询。
-
 2. 若用户已绑定学号，但grade_list表中没有其学生信息，则返回提示信息："你没有成绩记录"。
-
 3. 若用户已绑定学号，且grade_list表中有其成绩信息，则返回一个链接，学生通过点击该链接查询自己的成绩。
 search_grade()
 ```
@@ -89,7 +86,6 @@ search_grade()
         return $result;           
     }
 ```
-
 4. 若用户进行绑定学号行为，即输入成绩加学号
 ```
 function insert_user($submit_open_id,$submit_student_id){
@@ -101,7 +97,6 @@ function insert_user($submit_open_id,$submit_student_id){
         return $rows;    
 }
 ```
-
 5. 用户可以对学号进行解绑，即输入“解绑即可”
 ```
 function delete_user($submit_open_id){
@@ -113,7 +108,6 @@ function delete_user($submit_open_id){
         return $rows;    
     }
 ```
-
 
 ### 查询城市天气：回复天气加城市，会返回当前天气实况，相关天气指数，未来几天天气预报
 直接在聚合函数里找的天气接口，weather.php里包含多种查询天气的函数。
