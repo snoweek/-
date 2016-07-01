@@ -6,10 +6,13 @@ snoweek测试是一个基于php开发的微信公众号，最初的目标是做�
 * 发送一张图片，识别后返回信息"你发送了一张图片" 
 * 回复天气，返回"请按提示输入【天气查询】请输入天气加城市;如：天气北京"
 * 回复此公众号还未实现的功能，则会返回"抱歉，还未提供此功能。"
+
+
 ##项目结构
 * index.php:微信接口文件
 * weather.php:天气预报接口文件
 * grade_functions.php:学生查询成绩时，需要用到的相关函数
+
 
 ##数据库user表信息
 * user
@@ -38,7 +41,9 @@ CREATE TABLE `grade_list` (
 grade记录成绩;student_id记录学生的学号。两个表之间以student_id来连接。
 
 ##功能详细介绍
-* 查询学生成绩
+
+###查询学生成绩
+
 1. 若用户还未绑定学号，则返回提示信息："对不起，你还没有绑定学号，请输入成绩加学好;如：成绩199434040086"。
 check_user()函数
 ```
@@ -106,7 +111,7 @@ function delete_user($submit_open_id){
     }
 ```
 
-## 查询城市天气：回复天气加城市，会返回当前天气实况，相关天气指数，未来几天天气预报
+### 查询城市天气：回复天气加城市，会返回当前天气实况，相关天气指数，未来几天天气预报
 直接在聚合函数里找的天气接口，weather.php里包含多种查询天气的函数。
 调用天气接口的代码如下：
 ```
@@ -135,14 +140,14 @@ include 'weather.php'; //引入天气请求类
                }         
 ```
 
-## 查询当前时间
+### 查询当前时间
 ```
 $msgType = "text";
 $contentStr = date("Y-m-d H:i:s",time());
 $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 echo $resultStr;
 ```
-## 发送一张图片
+### 发送一张图片
 ```
 if($msgtype=="image"){
   $msgType = "text";
@@ -152,7 +157,7 @@ if($msgtype=="image"){
 }
 ```
 
-## 回复此公众号还未实现的功能
+### 回复此公众号还未实现的功能
 ```
 $msgType = "text";
 $contentStr = "【".$keyword."】抱歉，还未提供此功能。";
