@@ -69,7 +69,6 @@ function check_user($submit_open_id){
 3. 若用户已绑定学号，且grade_list表中有其成绩信息，则返回一个链接，学生通过点击该链接查询自己的成绩。
 search_grade()
 ```
-
     function search_grade($submit_student_id){
         $db=mysql_connect(SAE_MYSQL_HOST_M.':'.SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
         $dbc=mysql_select_db(SAE_MYSQL_DB, $db);
@@ -100,7 +99,7 @@ function insert_user($submit_open_id,$submit_student_id){
         $r=mysql_query($q);
         $rows=mysql_affected_rows();
         return $rows;    
-    }
+}
 ```
 
 5. 用户可以对学号进行解绑，即输入“解绑即可”
